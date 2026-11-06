@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "templateVersion": "1.0.0",
+  "id": "estab-auditoria-bistro-sh",
+  "slug": "auditoria-bistro-sh",
+  "atualizadoEm": "2026-11-06T22:49:47.776Z",
+  "estabelecimento": {
+    "nome": "Bistrô Auditoria SH (Teste E2E)",
+    "descricao": "Estabelecimento fictício para validação ponta a ponta antes de produção.",
+    "logoUrl": null,
+    "capaUrl": null,
+    "corSecundaria": "#1E3A8A",
+    "observacoes": [
+      "Estabelecimento de auditoria técnica E2E"
+    ],
+    "formasPagamento": [
+      "Pix",
+      "Cartão de Crédito"
+    ]
+  },
+  "categorias": [
+    {
+      "id": "cat-audit-1",
+      "nome": "Pratos Executivos",
+      "descricao": "Servidos das 12h às 15h",
+      "ordem": 0,
+      "produtos": [
+        {
+          "id": "prod-audit-1",
+          "nome": "Risoto de Cogumelos Frescos",
+          "descricao": "Arroz arbóreo, mix de cogumelos e parmesão.",
+          "imagemUrl": null,
+          "disponivel": true,
+          "ordem": 0,
+          "incertezaIA": null,
+          "variacoes": [
+            {
+              "id": "var-audit-1",
+              "nome": "Individual",
+              "precoCentavos": 4890
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
