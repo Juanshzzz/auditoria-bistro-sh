@@ -1,0 +1,10 @@
+{
+  "cardapioId": "estab-auditoria-bistro-sh",
+  "sistema": "Cardigital SH",
+  "name": "Bistrô Auditoria SH (Teste E2E)",
+  "slug": "auditoria-bistro-sh",
+  "templateName": "cardigital-sh-public-menu",
+  "templateVersion": "1.0.0",
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-06T22:49:47.776Z"
+}
