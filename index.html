@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bistrô Auditoria SH (Teste E2E) — Cardápio Digital</title>
+  <meta name="description" content="Estabelecimento fictício para validação ponta a ponta antes de produção." />
+  <meta property="og:title" content="Bistrô Auditoria SH (Teste E2E) — Cardápio Digital" />
+  <meta property="og:description" content="Estabelecimento fictício para validação ponta a ponta antes de produção." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="./app.js" defer></script>
+  <style>
+    :root {
+      --accent: #1E3A8A;
+      --bg: #FFFFFF;
+      --surface: #F7F7F8;
+      --border: #E5E5E7;
+      --text: #141416;
+      --muted: #52525B;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; background: var(--bg); color: var(--text); font-family: 'DM Sans', -apple-system, sans-serif; -webkit-tap-highlight-color: transparent; }
+    body { background: #FFFFFF; color: var(--text); line-height: 1.5; -webkit-font-smoothing: antialiased; padding-bottom: 3.5rem; overflow-x: hidden; overflow-y: auto; }
+    .container { max-width: 896px; margin: 0 auto; padding: 0 1rem; }
+    @media (min-width: 640px) { .container { padding: 0 1.5rem; } }
+    .capa-wrapper { width: 100%; height: clamp(144px, 28vw, 224px); overflow: hidden; background: var(--surface); border-bottom: 1px solid var(--border); }
+    .capa-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .header-estabelecimento { padding: 1.25rem 0; border-bottom: 1px solid var(--border); }
+    @media (min-width: 640px) { .header-estabelecimento { padding: 1.5rem 0; } }
+    .header-top { display: flex; align-items: flex-start; gap: 0.875rem; }
+    @media (min-width: 640px) { .header-top { gap: 1rem; } }
+    .logo-img { width: 56px; height: 56px; border-radius: 12px; object-fit: cover; border: 1px solid var(--border); flex-shrink: 0; background: var(--surface); }
+    @media (min-width: 640px) { .logo-img { width: 76px; height: 76px; } }
+    .estab-titulo { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1.25rem, 3.5vw, 1.875rem); font-weight: 700; color: var(--text); letter-spacing: -0.02em; line-height: 1.2; word-break: break-word; }
+    .estab-desc { margin-top: 0.375rem; color: var(--muted); font-size: clamp(0.8125rem, 2vw, 0.95rem); max-width: 65ch; word-break: break-word; }
+    .info-bar { margin-top: 1rem; padding-top: 0.875rem; border-top: 1px solid #F1F1F3; display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.8125rem; color: var(--muted); overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .info-bar::-webkit-scrollbar { display: none; }
+    .info-bloco strong { color: var(--text); font-weight: 600; margin-right: 0.35rem; }
+    .cat-nav { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); padding: 0.6rem 0; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; touch-action: pan-x pan-y; scrollbar-width: none; -ms-overflow-style: none; }
+    .cat-nav::-webkit-scrollbar { display: none; }
+    .cat-nav-inner { display: flex; gap: 0.4rem; align-items: center; width: max-content; }
+    .cat-link { display: inline-block; padding: 0.45rem 0.85rem; border-radius: 8px; font-size: 0.8125rem; font-weight: 600; color: #3F3F46; text-decoration: none; border: 1px solid transparent; transition: all 0.15s ease; flex-shrink: 0; }
+    @media (min-width: 640px) { .cat-link { font-size: 0.875rem; } }
+    .cat-link:hover, .cat-link:focus-visible { color: #FFFFFF; background: var(--accent); outline: none; }
+    .categoria-secao { padding-top: 1.75rem; scroll-margin-top: 3.5rem; }
+    .categoria-cabecalho { margin-bottom: 0.875rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--accent); }
+    .categoria-titulo { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1.05rem, 2.5vw, 1.25rem); font-weight: 700; color: var(--text); word-break: break-word; }
+    .categoria-descricao { font-size: 0.8125rem; color: var(--muted); margin-top: 0.25rem; word-break: break-word; }
+    .produtos-grid { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
+    @media (min-width: 720px) { .produtos-grid { grid-template-columns: repeat(2, 1fr); gap: 0.875rem; } }
+    .produto-card { display: flex; justify-content: space-between; gap: 0.875rem; padding: 0.875rem; border: 1px solid var(--border); border-radius: 12px; background: #FFFFFF; transition: border-color 0.15s ease; }
+    @media (min-width: 640px) { .produto-card { padding: 1rem; gap: 1rem; } }
+    .produto-conteudo { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: space-between; }
+    .produto-cabecalho { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; flex-wrap: wrap; }
+    .produto-titulo { font-size: 0.9375rem; font-weight: 600; color: var(--text); line-height: 1.35; word-break: break-word; }
+    @media (min-width: 640px) { .produto-titulo { font-size: 1rem; } }
+    .produto-descricao { font-size: 0.8125rem; color: var(--muted); margin-top: 0.3rem; line-height: 1.45; word-break: break-word; }
+    .produto-midia { width: 80px; height: 80px; border-radius: 8px; overflow: hidden; flex-shrink: 0; background: var(--surface); border: 1px solid var(--border); }
+    @media (min-width: 640px) { .produto-midia { width: 96px; height: 96px; } }
+    .produto-midia img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .variacoes-lista { margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.35rem 0.875rem; padding-top: 0.55rem; border-top: 1px solid #F1F1F3; }
+    .variacao-item { display: inline-flex; align-items: baseline; gap: 0.3rem; }
+    .variacao-nome { font-size: 0.75rem; color: var(--muted); font-weight: 500; }
+    .variacao-preco { font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; font-size: 0.875rem; font-weight: 600; color: var(--accent); }
+    .produto-indisponivel { opacity: 0.68; background: var(--surface); }
+    .produto-indisponivel .produto-titulo { text-decoration: line-through; }
+    .status-esgotado { font-size: 0.7rem; font-weight: 600; color: #991B1B; background: #FEF2F2; border: 1px solid #FECACA; padding: 0.125rem 0.45rem; border-radius: 6px; flex-shrink: 0; }
+    .rodape { margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid var(--border); font-size: 0.75rem; color: var(--muted); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+  </style>
+</head>
+<body>
+  
+  <header class="header-estabelecimento">
+    <div class="container">
+      <div class="header-top">
+        
+        <div style="min-width:0;flex:1;">
+          <h1 class="estab-titulo">Bistrô Auditoria SH (Teste E2E)</h1>
+          <p class="estab-desc">Estabelecimento fictício para validação ponta a ponta antes de produção.</p>
+        </div>
+      </div>
+      <div class="info-bar">
+              <div class="info-bloco">
+          <strong>Observações:</strong>
+          <span>Estabelecimento de auditoria técnica E2E</span>
+         </div>
+              <div class="info-bloco">
+          <strong>Formas de pagamento:</strong>
+          <span>Pix · Cartão de Crédito</span>
+         </div>
+             </div>
+    </div>
+  </header>
+
+  <nav class="cat-nav" aria-label="Categorias do cardápio">
+    <div class="container cat-nav-inner">
+      <a href="#cat-cat-audit-1" class="cat-link">Pratos Executivos</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section id="cat-cat-audit-1" class="categoria-secao" aria-labelledby="heading-cat-audit-1">
+        <div class="categoria-cabecalho">
+          <h2 id="heading-cat-audit-1" class="categoria-titulo">Pratos Executivos</h2>
+          <p class="categoria-descricao">Servidos das 12h às 15h</p>
+        </div>
+        <div class="produtos-grid">
+          <article class="produto-card " aria-label="Risoto de Cogumelos Frescos">
+            <div class="produto-conteudo">
+              <div>
+                <div class="produto-cabecalho">
+                  <h3 class="produto-titulo">Risoto de Cogumelos Frescos</h3>
+                  
+                </div>
+                <p class="produto-descricao">Arroz arbóreo, mix de cogumelos e parmesão.</p>
+              </div>
+              <div class="variacoes-lista">
+                <div class="variacao-item">
+                <span class="variacao-nome">Individual:</span>
+                <span class="variacao-preco">R$ 48,90</span>
+              </div>
+              </div>
+            </div>
+            
+          </article>
+        </div>
+      </section>
+    <footer class="rodape">
+      <span>Bistrô Auditoria SH (Teste E2E) · Preços em Reais (R$) sujeitos a conferência no estabelecimento.</span>
+      <span>Cardigital SH · v1.0.0</span>
+    </footer>
+  </main>
+</body>
+</html>
